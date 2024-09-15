@@ -1,4 +1,5 @@
 ﻿using Metodologías_de_Programación_I.Clases;
+using Metodologías_de_Programación_I.Clases.Iteradores;
 using Metodologías_de_Programación_I.Interfaces;
 using IComparable = Metodologías_de_Programación_I.Interfaces.IComparable;
 
@@ -65,11 +66,10 @@ namespace Metodologías_de_Programación_I
                 int legajoAleatorio = random.Next(1000, 9999); 
                 double promedioAleatorio = Math.Round(random.NextDouble() * 10, 2);
 
-                Alumno alumno = new Alumno(nombreAleatorio, dniAleatorio, legajoAleatorio, promedioAleatorio);
+                Alumno alumno = new Alumno(nombreAleatorio, dniAleatorio, legajoAleatorio, promedioAleatorio, null);
                 coleccionable.Agregar(alumno);
             }
         }
-
 
         public static void Informar(IColeccionable coleccionable)
         {
@@ -77,16 +77,16 @@ namespace Metodologías_de_Programación_I
             Console.WriteLine("El más chico de la coleccion es {0} ", coleccionable.Minimo());
             Console.WriteLine("La cantidad de elementos de la cola es {0}", coleccionable.Cuantos());
 
-            IComparable comparable = new Numero(new Random().Next());
+            //IComparable comparable = new Numero(new Random().Next());
 
-            if (coleccionable.Contiene(comparable))
-            {
-                Console.WriteLine($"El elemento '{comparable.ToString()}' esta en la colección.");
-            }
-            else
-            {
-                Console.WriteLine($"El elemento '{comparable.ToString()}' no esta en la colección.");
-            }
+            //if (coleccionable.Contiene(comparable))
+            //{
+            //    Console.WriteLine($"El elemento '{comparable.ToString()}' esta en la colección.");
+            //}
+            //else
+            //{
+            //    Console.WriteLine($"El elemento '{comparable.ToString()}' no esta en la colección.");
+            //}
 
             //Comparable maximo = coleccionable.Maximo();
             //int numeroPorTeclado = 45;
@@ -96,6 +96,28 @@ namespace Metodologías_de_Programación_I
             //    if (coleccionable.Contiene(maximo))
             //        Console.WriteLine("Contiene la personas con dni {45}");
             //}
+        }
+
+        public static void ImprimirElementos(IColeccionable coleccionable)
+        {
+            Iterador iter = new IteradorDePila(coleccionable);
+
+            while (!iter.fin())
+            {
+                Console.WriteLine(iter.actual());
+                iter.siguiente();
+            }
+        }
+
+        public static void CambiarEstrategia(IColeccionable coleccionable, IStrategyComparable strategyComparable)
+        {
+            Pila pilaAlumnos = (Pila)coleccionable;
+
+            foreach (var item in pilaAlumnos.pila)
+            {
+                Alumno alumno = (Alumno)item;
+                alumno.strategyComparable = strategyComparable;
+            }
         }
     }
 }

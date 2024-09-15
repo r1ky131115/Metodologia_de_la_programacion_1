@@ -1,14 +1,19 @@
-﻿using Metodologías_de_Programación_I.Interfaces;
+﻿using Metodologías_de_Programación_I.Clases.Iteradores;
+using Metodologías_de_Programación_I.Interfaces;
 using IComparable = Metodologías_de_Programación_I.Interfaces.IComparable;
-using System;
-using System.Collections.Generic;
 
 
 namespace Metodologías_de_Programación_I.Clases
 {
-    public class Cola : IColeccionable
+    public class Cola : IColeccionable, Iterable
     {
-        public List<IComparable> cola = new List<IComparable>();
+        public List<IComparable> cola {  get; set; }
+        int paginaActual;
+
+        public Cola()
+        {
+            cola = new List<IComparable>();
+        }
 
         public void Agregar(IComparable comparable)
         {
@@ -45,7 +50,7 @@ namespace Metodologías_de_Programación_I.Clases
                 }
                 else
                 {
-                    if (max.sosMayor(i))
+                    if (!max.sosMayor(i))
                     {
                         max = i;
                     }
@@ -66,13 +71,18 @@ namespace Metodologías_de_Programación_I.Clases
                 }
                 else
                 {
-                    if (min.sosMenor(i))
+                    if (!min.sosMenor(i))
                     {
                         min = i;
                     }
                 }
             }
             return min;
+        }
+
+        public Iterador CrearIterador()
+        {
+            return new IteradorDeCola(this);
         }
     }
 }

@@ -1,9 +1,4 @@
 ﻿using Metodologías_de_Programación_I.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using IComparable = Metodologías_de_Programación_I.Interfaces.IComparable;
 
 namespace Metodologías_de_Programación_I.Clases
@@ -12,6 +7,7 @@ namespace Metodologías_de_Programación_I.Clases
     {
         private string Nombre;
         private int dni;
+        IStrategyComparable strategyComparable;
 
         public Persona(string n, int d)
         {
@@ -22,19 +18,19 @@ namespace Metodologías_de_Programación_I.Clases
         public string getNombre() { return Nombre; }
         public int getDni() { return dni; }
 
-        public bool sosIgual(IComparable comparable)
+        public virtual bool sosIgual(IComparable comparable)
         {
             Numero numero = (Numero)comparable;
             return this.dni == numero.getValor();
         }
 
-        public bool sosMenor(IComparable comparable)
+        public virtual bool sosMenor(IComparable comparable)
         {
             Persona otraPersona = (Persona)comparable;
             return this.dni < otraPersona.getDni();
         }
 
-        public bool sosMayor(IComparable comparable)
+        public virtual bool sosMayor(IComparable comparable)
         {
             Persona otraPersona = (Persona)comparable;
             return this.dni > otraPersona.getDni();

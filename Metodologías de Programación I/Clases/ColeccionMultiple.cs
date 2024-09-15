@@ -28,7 +28,7 @@ namespace Metodologías_de_Programación_I.Clases
 
             if (minPila != null && minCola != null)
             {
-                if (minPila.sosMenor(minCola))
+                if (!minPila.sosMenor(minCola))
                 {
                     minGeneral = minPila;
                 }
@@ -43,14 +43,14 @@ namespace Metodologías_de_Programación_I.Clases
 
         public IComparable Maximo()
         {
-            IComparable minPila = Pila.Minimo();
-            IComparable minCola = Cola.Minimo();
+            IComparable minPila = Pila.Maximo();
+            IComparable minCola = Cola.Maximo();
 
             IComparable maxGeneral = null;
 
             if (minPila != null && minCola != null)
             {
-                if (minPila.sosMenor(minCola))
+                if (!minPila.sosMenor(minCola))
                 {
                     maxGeneral = minPila;
                 }
@@ -63,12 +63,12 @@ namespace Metodologías_de_Programación_I.Clases
             return maxGeneral;
         }
 
-        public void Agregar(Interfaces.IComparable comparable)
+        public void Agregar(IComparable comparable)
         {
             throw new NotImplementedException();
         }
 
-        public bool Contiene(Interfaces.IComparable comparable)
+        public bool Contiene(IComparable comparable)
         {
             return Pila.Contiene(comparable) || Cola.Contiene(comparable);
         }

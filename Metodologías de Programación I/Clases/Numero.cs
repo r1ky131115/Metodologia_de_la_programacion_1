@@ -16,19 +16,19 @@ namespace Metodologías_de_Programación_I.Clases
             return valor;
         }
 
-        public bool sosIgual(IComparable comparable)
+        public virtual bool sosIgual(IComparable comparable)
         {
             Numero otroNumero = (Numero)comparable;
             return this.valor == otroNumero.getValor();
         }
 
-        public bool sosMenor(IComparable comparable)
+        public virtual bool sosMenor(IComparable comparable)
         {
             Numero otroNumero = (Numero)comparable;
             return this.valor < otroNumero.getValor();
         }
 
-        public bool sosMayor(IComparable comparable)
+        public virtual bool sosMayor(IComparable comparable)
         {
             Numero otroNumero = (Numero)comparable;
             return this.valor > otroNumero.getValor();
