@@ -51,12 +51,20 @@ Sí, podría haber hecho lo mismo sin interfaces, pero a un costo significativo.
 
 //Helper.ImprimirElementos(pilaAlumnos);
 
-Helper.CambiarEstrategia(pilaAlumnos, new CompararPorDNI());
-Helper.Informar(pilaAlumnos);
+//Helper.CambiarEstrategia(pilaAlumnos, new CompararPorDNI());
+//Helper.Informar(pilaAlumnos);
 
 
-Helper.CambiarEstrategia(pilaAlumnos, new CompararPorLegajo());
-Helper.Informar(pilaAlumnos);
+//Helper.CambiarEstrategia(pilaAlumnos, new CompararPorLegajo());
+//Helper.Informar(pilaAlumnos);
 
-Helper.CambiarEstrategia(pilaAlumnos, new CompararPorPromedio());
-Helper.Informar(pilaAlumnos);
+//Helper.CambiarEstrategia(pilaAlumnos, new CompararPorPromedio());
+//Helper.Informar(pilaAlumnos);
+
+Helper.Llenar(pila, 1);
+
+Helper.Informar(pila, 1);
+
+/* REFLECCIÓN:
+ * Se podria tener una fabrica de coleccionables que tenga un metodo llamado "crearColeccion" que reciba una opcion y eliga que tipo de coleecion se crea.
+ */

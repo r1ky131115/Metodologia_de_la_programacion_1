@@ -1,4 +1,5 @@
 ﻿using Metodologías_de_Programación_I.Clases;
+using Metodologías_de_Programación_I.Clases.Factory;
 using Metodologías_de_Programación_I.Clases.Iteradores;
 using Metodologías_de_Programación_I.Interfaces;
 using IComparable = Metodologías_de_Programación_I.Interfaces.IComparable;
@@ -117,6 +118,32 @@ namespace Metodologías_de_Programación_I
             {
                 Alumno alumno = (Alumno)item;
                 alumno.strategyComparable = strategyComparable;
+            }
+        }
+
+        public static void Llenar(IColeccionable coleccionable, int opcion)
+        {
+            for (int i = 0; i < 20; i++)
+            {
+                IComparable comparable = Fabrica.crearAleatorio(opcion);
+                coleccionable.Agregar(comparable);
+            }
+        }
+
+        public static void Informar(IColeccionable coleccionable, int opcion)
+        {
+            Console.WriteLine("El más grande de la coleccion es {0} ", coleccionable.Maximo());
+            Console.WriteLine("El más chico de la coleccion es {0} ", coleccionable.Minimo());
+            Console.WriteLine("La cantidad de elementos de la cola es {0}", coleccionable.Cuantos());
+
+            IComparable comparable = Fabrica.crearPorTeclado(opcion);
+            if (coleccionable.Contiene(comparable))
+            {
+                Console.WriteLine("El elemento leido está en la colección.");
+            }
+            else
+            {
+                Console.WriteLine("El elemento leido no está en la colección.");
             }
         }
     }
