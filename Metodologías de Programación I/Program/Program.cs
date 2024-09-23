@@ -1,6 +1,5 @@
 ﻿using Metodologías_de_Programación_I;
 using Metodologías_de_Programación_I.Clases;
-using Metodologías_de_Programación_I.Interfaces;
 
 Pila pila = new Pila();
 Cola cola = new Cola();
@@ -61,10 +60,17 @@ Sí, podría haber hecho lo mismo sin interfaces, pero a un costo significativo.
 //Helper.CambiarEstrategia(pilaAlumnos, new CompararPorPromedio());
 //Helper.Informar(pilaAlumnos);
 
-Helper.Llenar(pila, 1);
+//Helper.Llenar(pila, 1);
 
-Helper.Informar(pila, 1);
+//Helper.Informar(pila, 1);
 
 /* REFLECCIÓN:
  * Se podria tener una fabrica de coleccionables que tenga un metodo llamado "crearColeccion" que reciba una opcion y eliga que tipo de coleecion se crea.
  */
+
+
+Profesor profesor = new Profesor("Profe", 123, 10);
+
+Helper.LlenarAlumnosObservando(profesor);
+
+Helper.DictadoDeClases(profesor);

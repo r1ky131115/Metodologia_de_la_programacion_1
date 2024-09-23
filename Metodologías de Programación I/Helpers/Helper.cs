@@ -146,5 +146,30 @@ namespace Metodologías_de_Programación_I
                 Console.WriteLine("El elemento leido no está en la colección.");
             }
         }
+
+
+        public static void DictadoDeClases(Profesor profesor)
+        {
+            for(int i = 0;i < 5;i++)
+            {
+                profesor.hablarALaClase();
+                profesor.escribirEnElPizarron();
+            }
+        }
+
+        public static void LlenarAlumnosObservando(Profesor profesor)
+        {
+            Random random = new Random();
+            for (int i = 0; i < 20; i++)
+            {
+                string nombreAleatorio = GetNombre();
+                int dniAleatorio = random.Next(10000000, 99999999);
+                int legajoAleatorio = random.Next(1000, 9999);
+                double promedioAleatorio = Math.Round(random.NextDouble() * 10, 2);
+
+                Alumno alumno = new Alumno(nombreAleatorio, dniAleatorio, legajoAleatorio, promedioAleatorio, null);
+                profesor.AgregarObservador(alumno);
+            }
+        }
     }
 }

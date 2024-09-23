@@ -1,14 +1,23 @@
-﻿using Metodologías_de_Programación_I.Helpers;
-using Metodologías_de_Programación_I.Interfaces;
+﻿using Metodologías_de_Programación_I.Interfaces;
+using Metodologías_de_Programación_I.Interfaces.Observer;
 using IComparable = Metodologías_de_Programación_I.Interfaces.IComparable;
 
 namespace Metodologías_de_Programación_I.Clases
 {
-    public class Alumno : Persona
+    public class Alumno : Persona, IAlumnoObserver
     {
         private int legajo;
         private double promedio;
         public IStrategyComparable strategyComparable {  get; set; }
+
+        private static Random random = new Random();
+
+        private string[] distracciones = {
+            "Mirando el celular",
+            "Dibujando en el margen de la carpeta",
+            "Tirando aviones de papel"
+        };
+
 
         public Alumno(string n, int d, int l, double p, IStrategyComparable strategy) : base(n, d)
         {
@@ -50,36 +59,15 @@ namespace Metodologías_de_Programación_I.Clases
             return strategyComparable.SosMayor(this, comparable);
         }
 
-        public void prestarAtencion()
+        public void PrestarAtencion()
         {
-            Console.WriteLine("Prestando atención.");
+            Console.WriteLine($"{this.getNombre()} está prestando atención.");
         }
 
-        public void distraer()
+        public void Distraerse()
         {
-            int random = GeneradorDeDatosAleatorios.numeroAleatorio(2);
-            switch (random)
-            {
-                case 0:
-                    Console.WriteLine("Mirando el celular.");
-
-                    break;
-                case 1:
-                    Console.WriteLine("Dibujando en el margen de la carpeta.");
-
-                    break;
-                case 2:
-                    Console.WriteLine("Tirando aviones de papel.");
-                    break;
-                default:
-                    Console.WriteLine("Distraido.");
-                    break;
-            }
-        }
-
-        public override string ToString()
-        {
-            return $"Nombre: {this.getNombre()} con Dni {this.getDni()}, legajo {this.getLegajo()} y un promedio de {this.getPromedio()}.";
+            int indice = random.Next(distracciones.Length);
+            Console.WriteLine($"{this.getNombre()} se está distrayendo: {distracciones[indice]}.");
         }
     }
 }
