@@ -4,10 +4,11 @@ using IComparable = Metodologías_de_Programación_I.Interfaces.IComparable;
 
 namespace Metodologías_de_Programación_I.Clases
 {
-    public class Alumno : Persona, IAlumnoObserver
+    public class Alumno : Persona, IAlumnoObserver, IStudent
     {
         private int legajo;
         private double promedio;
+        private int calificacion;
         public IStrategyComparable strategyComparable {  get; set; }
 
         private static Random random = new Random();
@@ -19,11 +20,31 @@ namespace Metodologías_de_Programación_I.Clases
         };
 
 
+        public int Calificacion
+        {
+            get { return calificacion; }
+            set { calificacion = value; }
+        }
+
         public Alumno(string n, int d, int l, double p, IStrategyComparable strategy) : base(n, d)
         {
             legajo = l;
             promedio = p;
             strategyComparable = strategy;
+        }
+
+        public Alumno(string n, int d, int legajo, double promedio) : base(n, d)
+        {
+        }
+
+        public virtual int ResponderPregunta(int pregunta)
+        {
+            return random.Next(1, 4);
+        }
+
+        public string MostrarCalificacion()
+        {
+            return $"{this.getNombre()} {calificacion}";
         }
 
         public int getLegajo()
@@ -68,6 +89,26 @@ namespace Metodologías_de_Programación_I.Clases
         {
             int indice = random.Next(distracciones.Length);
             Console.WriteLine($"{this.getNombre()} se está distrayendo: {distracciones[indice]}.");
+        }
+
+        public string GetName()
+        {
+            return $"{this.getNombre()}";
+        }
+
+        public int GetCalification()
+        {
+            return this.Calificacion;
+        }
+
+        public void SetCalification(int calification)
+        {
+            this.Calificacion = calification;
+        }
+
+        public int AnswerQuestion(int question)
+        {
+            return this.ResponderPregunta(question);
         }
     }
 }

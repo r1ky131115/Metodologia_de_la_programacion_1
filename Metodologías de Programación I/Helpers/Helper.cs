@@ -1,7 +1,10 @@
 ﻿using Metodologías_de_Programación_I.Clases;
+using Metodologías_de_Programación_I.Clases.Adapter;
+using Metodologías_de_Programación_I.Clases.Decorator;
 using Metodologías_de_Programación_I.Clases.Factory;
 using Metodologías_de_Programación_I.Clases.Iteradores;
 using Metodologías_de_Programación_I.Interfaces;
+using System;
 using IComparable = Metodologías_de_Programación_I.Interfaces.IComparable;
 
 namespace Metodologías_de_Programación_I
@@ -62,12 +65,7 @@ namespace Metodologías_de_Programación_I
             Random random = new Random();
             for (int i = 0; i < 20; i++)
             {
-                string nombreAleatorio = GetNombre();
-                int dniAleatorio = random.Next(10000000, 99999999);
-                int legajoAleatorio = random.Next(1000, 9999); 
-                double promedioAleatorio = Math.Round(random.NextDouble() * 10, 2);
-
-                Alumno alumno = new Alumno(nombreAleatorio, dniAleatorio, legajoAleatorio, promedioAleatorio, null);
+                Alumno alumno = CrearAlumnoAleatorio();
                 coleccionable.Agregar(alumno);
             }
         }
@@ -150,7 +148,7 @@ namespace Metodologías_de_Programación_I
 
         public static void DictadoDeClases(Profesor profesor)
         {
-            for(int i = 0;i < 5;i++)
+            for (int i = 0; i < 5; i++)
             {
                 profesor.hablarALaClase();
                 profesor.escribirEnElPizarron();
@@ -162,14 +160,58 @@ namespace Metodologías_de_Programación_I
             Random random = new Random();
             for (int i = 0; i < 20; i++)
             {
+                Alumno alumno = CrearAlumnoAleatorio();
+                profesor.AgregarObservador(alumno);
+            }
+        }
+
+
+        public static void LlenarAlumnosEstudiosos(Teacher teacher)
+        {
+            Random random = new Random();
+            for (int i = 0; i < 10; i++)
+            {
                 string nombreAleatorio = GetNombre();
                 int dniAleatorio = random.Next(10000000, 99999999);
                 int legajoAleatorio = random.Next(1000, 9999);
                 double promedioAleatorio = Math.Round(random.NextDouble() * 10, 2);
 
-                Alumno alumno = new Alumno(nombreAleatorio, dniAleatorio, legajoAleatorio, promedioAleatorio, null);
-                profesor.AgregarObservador(alumno);
+                IStudent alumnoEstudioso = new AlumnoMuyEstudioso(nombreAleatorio, dniAleatorio, legajoAleatorio, promedioAleatorio);
+                teacher.GoToClass(alumnoEstudioso);
             }
+        }
+
+        public static void DecoradorDeAlumnos(List<IStudent> students)
+        {
+            foreach (var student in students)
+            {
+                //StudentDecorator decoratedStudent = new RecuadroDecorator(student);
+                //EstadoDecorator decoratedStudent = new EstadoDecorator(student);
+                //LegajoDecorator decoratedStudent = new LegajoDecorator(student, 1);
+                //NotaEnLetrasDecorator decoratedStudent = new NotaEnLetrasDecorator(student);
+                //StudentDecorator decoratedStudent = new StudentDecorator(student);
+
+                IStudent decoratedStudent = new RecuadroDecorator(
+                    new EstadoDecorator(
+                        new NotaEnLetrasDecorator(
+                            new LegajoDecorator(student, 1000)
+                        )
+                    )
+                );
+
+                Console.WriteLine(decoratedStudent.MostrarCalificacion());
+            }
+        }
+
+        private static Alumno CrearAlumnoAleatorio()
+        {
+            Random random = new Random();
+            string nombreAleatorio = GetNombre();
+            int dniAleatorio = random.Next(10000000, 99999999);
+            int legajoAleatorio = random.Next(1000, 9999);
+            double promedioAleatorio = Math.Round(random.NextDouble() * 10, 2);
+
+            return new Alumno(nombreAleatorio, dniAleatorio, legajoAleatorio, promedioAleatorio);
         }
     }
 }

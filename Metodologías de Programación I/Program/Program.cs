@@ -1,5 +1,6 @@
 ﻿using Metodologías_de_Programación_I;
 using Metodologías_de_Programación_I.Clases;
+using Metodologías_de_Programación_I.Clases.Adapter;
 
 Pila pila = new Pila();
 Cola cola = new Cola();
@@ -69,8 +70,17 @@ Sí, podría haber hecho lo mismo sin interfaces, pero a un costo significativo.
  */
 
 
-Profesor profesor = new Profesor("Profe", 123, 10);
+//Profesor profesor = new Profesor("Profe", 123, 10);
 
-Helper.LlenarAlumnosObservando(profesor);
+//Helper.LlenarAlumnosObservando(profesor);
 
-Helper.DictadoDeClases(profesor);
+//Helper.DictadoDeClases(profesor);
+
+
+Teacher teacher = new Teacher();
+
+Helper.LlenarAlumnosEstudiosos(teacher);
+
+teacher.TeachingAClass();
+
+Helper.DecoradorDeAlumnos(teacher.students);
