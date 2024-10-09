@@ -1,12 +1,17 @@
 ﻿using Metodologías_de_Programación_I.Clases.Iteradores;
 using Metodologías_de_Programación_I.Interfaces;
+using Metodologías_de_Programación_I.Interfaces.Command;
 using IComparable = Metodologías_de_Programación_I.Interfaces.IComparable;
 
 namespace Metodologías_de_Programación_I.Clases
 {
-    public class Pila : IColeccionable, Iterable
+    public class Pila : IColeccionable, Iterable, IOrdenable
     {
         public List<IComparable> pila {  get; set; }
+
+        IOrdenEnAula1 ordenInicio;
+        IOrdenEnAula1 ordenAulaLlena;
+        IOrdenEnAula2 ordenReceptor;
 
         public Pila()
         {
@@ -15,7 +20,18 @@ namespace Metodologías_de_Programación_I.Clases
 
         public void Agregar(IComparable comparable)
         {
+            if (pila.Count == 0)
+            {
+                setOrdenInicio(ordenInicio);
+            }
+
+            setOrdenLlegaAlumno(ordenReceptor);
             pila.Add(comparable);
+
+            if (pila.Count == 40)
+            {
+                setOrdenAulaLlena(ordenAulaLlena);
+            }
         }
 
         public bool Contiene(IComparable comparable)
@@ -80,6 +96,23 @@ namespace Metodologías_de_Programación_I.Clases
         public Iterador CrearIterador()
         {
             return new IteradorDePila(this);
+        }
+
+        public void setOrdenInicio(IOrdenEnAula1 ordenEnAula1)
+        {
+            ordenInicio = ordenEnAula1;
+            ordenInicio.Ejecutar();
+        }
+
+        public void setOrdenLlegaAlumno(IOrdenEnAula2 ordenEnAula2)
+        {
+            ordenReceptor = ordenEnAula2;
+        }
+
+        public void setOrdenAulaLlena(IOrdenEnAula1 ordenEnAula1)
+        {
+            ordenAulaLlena = ordenEnAula1;
+            ordenAulaLlena.Ejecutar();
         }
     }
 }

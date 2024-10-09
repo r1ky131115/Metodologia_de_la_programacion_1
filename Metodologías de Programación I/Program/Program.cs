@@ -1,6 +1,9 @@
 ﻿using Metodologías_de_Programación_I;
 using Metodologías_de_Programación_I.Clases;
 using Metodologías_de_Programación_I.Clases.Adapter;
+using Metodologías_de_Programación_I.Clases.Command;
+using Metodologías_de_Programación_I.Clases.Proxy;
+using Metodologías_de_Programación_I.Interfaces.Command;
 
 Pila pila = new Pila();
 Cola cola = new Cola();
@@ -77,10 +80,25 @@ Sí, podría haber hecho lo mismo sin interfaces, pero a un costo significativo.
 //Helper.DictadoDeClases(profesor);
 
 
-Teacher teacher = new Teacher();
+//Teacher teacher = new Teacher();
 
-Helper.LlenarAlumnosEstudiosos(teacher);
+//Helper.LlenarAlumnosEstudiosos(teacher);
 
-teacher.TeachingAClass();
+//teacher.TeachingAClass();
 
-Helper.DecoradorDeAlumnos(teacher.students);
+//Helper.DecoradorDeAlumnos(teacher.students);
+
+//ProxyAlumnoMuyEstudioso proxyAlumnoMuyEstudioso = Helper.CrearProxyAlumnoMuyEstudiosoAleatorio();
+
+//var test = proxyAlumnoMuyEstudioso.AnswerQuestion(2);
+
+Aula aula = new Aula();
+Alumno alumno = Helper.CrearAlumnoAleatorio();
+
+IOrdenEnAula1 ordenInicio = new OrdenInicio(aula);
+IOrdenEnAula1 ordenAulaLlena = new OrdenAulaLlena(aula);
+IOrdenEnAula2 ordenReceptor = new OrdenReceptor(aula);
+
+ordenInicio.Ejecutar();
+ordenAulaLlena.Ejecutar();
+ordenReceptor.Ejecutar(alumno);

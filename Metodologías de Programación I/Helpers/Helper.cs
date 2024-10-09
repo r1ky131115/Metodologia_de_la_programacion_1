@@ -3,6 +3,7 @@ using Metodologías_de_Programación_I.Clases.Adapter;
 using Metodologías_de_Programación_I.Clases.Decorator;
 using Metodologías_de_Programación_I.Clases.Factory;
 using Metodologías_de_Programación_I.Clases.Iteradores;
+using Metodologías_de_Programación_I.Clases.Proxy;
 using Metodologías_de_Programación_I.Interfaces;
 using System;
 using IComparable = Metodologías_de_Programación_I.Interfaces.IComparable;
@@ -168,15 +169,18 @@ namespace Metodologías_de_Programación_I
 
         public static void LlenarAlumnosEstudiosos(Teacher teacher)
         {
-            Random random = new Random();
             for (int i = 0; i < 10; i++)
             {
-                string nombreAleatorio = GetNombre();
-                int dniAleatorio = random.Next(10000000, 99999999);
-                int legajoAleatorio = random.Next(1000, 9999);
-                double promedioAleatorio = Math.Round(random.NextDouble() * 10, 2);
+                IStudent alumnoEstudioso = CrearAlumnoMuyEstudiosoAleatorio();
+                teacher.GoToClass(alumnoEstudioso);
+            }
+        }
 
-                IStudent alumnoEstudioso = new AlumnoMuyEstudioso(nombreAleatorio, dniAleatorio, legajoAleatorio, promedioAleatorio);
+        public static void LlenarProxyAlumnosEstudiosos(Teacher teacher)
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                IStudent alumnoEstudioso = CrearProxyAlumnoMuyEstudiosoAleatorio();
                 teacher.GoToClass(alumnoEstudioso);
             }
         }
@@ -203,7 +207,7 @@ namespace Metodologías_de_Programación_I
             }
         }
 
-        private static Alumno CrearAlumnoAleatorio()
+        public static Alumno CrearAlumnoAleatorio()
         {
             Random random = new Random();
             string nombreAleatorio = GetNombre();
@@ -212,6 +216,28 @@ namespace Metodologías_de_Programación_I
             double promedioAleatorio = Math.Round(random.NextDouble() * 10, 2);
 
             return new Alumno(nombreAleatorio, dniAleatorio, legajoAleatorio, promedioAleatorio);
+        }
+
+        public static AlumnoMuyEstudioso CrearAlumnoMuyEstudiosoAleatorio()
+        {
+            Random random = new Random();
+            string nombreAleatorio = GetNombre();
+            int dniAleatorio = random.Next(10000000, 99999999);
+            int legajoAleatorio = random.Next(1000, 9999);
+            double promedioAleatorio = Math.Round(random.NextDouble() * 10, 2);
+
+            return new AlumnoMuyEstudioso(nombreAleatorio, dniAleatorio, legajoAleatorio, promedioAleatorio);
+        }
+
+        public static ProxyAlumnoMuyEstudioso CrearProxyAlumnoMuyEstudiosoAleatorio()
+        {
+            Random random = new Random();
+            string nombreAleatorio = GetNombre();
+            int dniAleatorio = random.Next(10000000, 99999999);
+            int legajoAleatorio = random.Next(1000, 9999);
+            double promedioAleatorio = Math.Round(random.NextDouble() * 10, 2);
+
+            return new ProxyAlumnoMuyEstudioso(nombreAleatorio, dniAleatorio, legajoAleatorio, promedioAleatorio, new CompararPorDNI());
         }
     }
 }
