@@ -99,6 +99,10 @@ IOrdenEnAula1 ordenInicio = new OrdenInicio(aula);
 IOrdenEnAula1 ordenAulaLlena = new OrdenAulaLlena(aula);
 IOrdenEnAula2 ordenReceptor = new OrdenReceptor(aula);
 
+pila.setOrdenInicio(new OrdenInicio(aula));
+pila.setOrdenLlegaAlumno(new OrdenReceptor(aula), alumno);
+pila.setOrdenAulaLlena(new OrdenAulaLlena(aula));
+
 ordenInicio.Ejecutar();
 ordenAulaLlena.Ejecutar();
 ordenReceptor.Ejecutar(alumno);

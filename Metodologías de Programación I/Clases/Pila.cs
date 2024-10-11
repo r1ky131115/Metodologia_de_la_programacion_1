@@ -25,7 +25,7 @@ namespace Metodologías_de_Programación_I.Clases
                 setOrdenInicio(ordenInicio);
             }
 
-            setOrdenLlegaAlumno(ordenReceptor);
+            setOrdenLlegaAlumno(ordenReceptor, comparable);
             pila.Add(comparable);
 
             if (pila.Count == 40)
@@ -101,18 +101,19 @@ namespace Metodologías_de_Programación_I.Clases
         public void setOrdenInicio(IOrdenEnAula1 ordenEnAula1)
         {
             ordenInicio = ordenEnAula1;
-            ordenInicio.Ejecutar();
+            ordenInicio?.Ejecutar();
         }
 
-        public void setOrdenLlegaAlumno(IOrdenEnAula2 ordenEnAula2)
+        public void setOrdenLlegaAlumno(IOrdenEnAula2 ordenEnAula2, IComparable comparable)
         {
             ordenReceptor = ordenEnAula2;
+            ordenReceptor?.Ejecutar(comparable);
         }
 
         public void setOrdenAulaLlena(IOrdenEnAula1 ordenEnAula1)
         {
             ordenAulaLlena = ordenEnAula1;
-            ordenAulaLlena.Ejecutar();
+            ordenAulaLlena?.Ejecutar();
         }
     }
 }
