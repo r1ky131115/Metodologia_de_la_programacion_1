@@ -2,8 +2,10 @@
 using Metodologías_de_Programación_I.Clases;
 using Metodologías_de_Programación_I.Clases.Adapter;
 using Metodologías_de_Programación_I.Clases.Command;
+using Metodologías_de_Programación_I.Clases.Composite;
 using Metodologías_de_Programación_I.Clases.Proxy;
 using Metodologías_de_Programación_I.Interfaces.Command;
+using Metodologías_de_Programación_I.Interfaces.Composite;
 
 Pila pila = new Pila();
 Cola cola = new Cola();
@@ -92,17 +94,40 @@ Sí, podría haber hecho lo mismo sin interfaces, pero a un costo significativo.
 
 //var test = proxyAlumnoMuyEstudioso.AnswerQuestion(2);
 
-Aula aula = new Aula();
-Alumno alumno = Helper.CrearAlumnoAleatorio();
+//Aula aula = new Aula();
+//Metodologías_de_Programación_I.Clases.Alumno alumno = Helper.CrearAlumnoAleatorio();
 
-IOrdenEnAula1 ordenInicio = new OrdenInicio(aula);
-IOrdenEnAula1 ordenAulaLlena = new OrdenAulaLlena(aula);
-IOrdenEnAula2 ordenReceptor = new OrdenReceptor(aula);
+//IOrdenEnAula1 ordenInicio = new OrdenInicio(aula);
+//IOrdenEnAula1 ordenAulaLlena = new OrdenAulaLlena(aula);
+//IOrdenEnAula2 ordenReceptor = new OrdenReceptor(aula);
 
-pila.setOrdenInicio(new OrdenInicio(aula));
-pila.setOrdenLlegaAlumno(new OrdenReceptor(aula), alumno);
-pila.setOrdenAulaLlena(new OrdenAulaLlena(aula));
+//pila.setOrdenInicio(new OrdenInicio(aula));
+//pila.setOrdenLlegaAlumno(new OrdenReceptor(aula), alumno);
+//pila.setOrdenAulaLlena(new OrdenAulaLlena(aula));
 
-ordenInicio.Ejecutar();
-ordenAulaLlena.Ejecutar();
-ordenReceptor.Ejecutar(alumno);
+//ordenInicio.Ejecutar();
+//ordenAulaLlena.Ejecutar();
+//ordenReceptor.Ejecutar(alumno);
+
+//GrupoAlumno grupoAlumno = new GrupoAlumno();
+
+//var alumnoComponent1 = new AlumnoComponent("nombre1", "apellidoTest1");
+//var alumnoComponent2 = new AlumnoComponent("nombre2", "apellidoTest2");
+//var alumnoComponent3 = new AlumnoComponent("nombre3", "apellidoTest3");
+
+//grupoAlumno.AgregarAlumno(alumnoComponent1);
+//grupoAlumno.AgregarAlumno(alumnoComponent2);
+//grupoAlumno.AgregarAlumno(alumnoComponent3);
+
+//grupoAlumno.responderPregunta();
+//grupoAlumno.setCalificacion(7);
+//grupoAlumno.mostrarCalificacion();
+
+//alumnoComponent1.votarRespuesta("uno");
+//alumnoComponent2.votarRespuesta("dos");
+//alumnoComponent3.votarRespuesta("uno");
+
+
+//Console.WriteLine(alumnoComponent1.responderPregunta());
+//Console.WriteLine(alumnoComponent2.responderPregunta());
+//Console.WriteLine(alumnoComponent3.responderPregunta());
