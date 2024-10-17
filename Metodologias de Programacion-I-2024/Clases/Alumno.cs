@@ -1,4 +1,6 @@
-﻿using Metodologias_de_Programacion_I_2024.Interfaces;
+﻿using Metodologias_de_Programacion_I_2024.Clases.Strategy;
+using Metodologias_de_Programacion_I_2024.Interfaces;
+using Metodologias_de_Programacion_I_2024.Interfaces.Strategy;
 
 namespace Metodologias_de_Programacion_I_2024.Clases
 {
@@ -6,11 +8,17 @@ namespace Metodologias_de_Programacion_I_2024.Clases
     {
         private int legajo;
         private double promedio;
+        private IStrategyAlumno strategyAlumno = new CompararPorDNI();
 
         public Alumno(string n, int d, int l, double p) : base(n, d)
         {
             legajo = l;
             promedio = p;
+        }
+
+        public void setStrategy(IStrategyAlumno strategy)
+        {
+            strategyAlumno = strategy;
         }
 
         public int getLegajo()
@@ -23,19 +31,20 @@ namespace Metodologias_de_Programacion_I_2024.Clases
             return promedio;
         }
 
-        public bool SosIgual(Comparable comparable)
+        public override bool SosIgual(Comparable comparable)
         {
-            Alumno otroAlumno = (Alumno)comparable;
-            return this.legajo == otroAlumno.getLegajo();
+            return strategyAlumno.SosMayor(this, comparable);
+            //Alumno otroAlumno = (Alumno)comparable;
+            //return this.legajo == otroAlumno.getLegajo();
         }
 
-        public bool SosMenor(Comparable comparable)
+        public override bool SosMenor(Comparable comparable)
         {
             Alumno otroAlumno = (Alumno)comparable;
             return this.legajo < otroAlumno.getLegajo();
         }
 
-        public bool SosMayor(Comparable comparable)
+        public virtual bool SosMayor(Comparable comparable)
         {
             Alumno otroAlumno = (Alumno)comparable;
             return this.legajo > otroAlumno.getLegajo();

@@ -165,5 +165,10 @@ namespace Metodologias_de_Programacion_I_2024
             Console.WriteLine("******************************************************");
 
         }
+
+        public static void Practica_2()
+        {
+
+        }
     }
 }
